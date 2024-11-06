@@ -1,15 +1,17 @@
-name: 'Release Drafter'
-tag_template: 'v${version}'
-categories:
-  - title: '🚀 New Features'
-    labels:
-      - 'feature'
-  - title: '🐛 Bug Fixes'
-    labels:
-      - 'bug'
-  - title: '🛠️ Improvements'
-    labels:
-      - 'enhancement'
-change_template: '- ${title} (${url})'
-draft: true
-prerelease: false
+name: "Release {version}"
+tag_template: "v{version}"
+template: |
+  ## What's Changed
+  {changes}
+
+  ## New Features
+  {new_features}
+
+  ## Bug Fixes
+  {bug_fixes}
+
+  ## Known Issues
+  {known_issues}
+
+  ## Improvements/Enhancements
+  {improvements}
