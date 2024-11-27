@@ -1,0 +1,45 @@
+name-template: 'Release v${{ NEXT_MAJOR }}.${{ NEXT_MINOR }}.${{ NEXT_PATCH }}'
+tag-template: 'v${{ NEXT_MAJOR }}.${{ NEXT_MINOR }}.${{ NEXT_PATCH }}'
+categories:
+  - title: 🚀 Features
+    labels:
+      - feature
+      - enhancement
+      - new-feature
+  - title: 🐛 Bug Fixes
+    labels:
+      - fix
+      - bugfix
+      - bug
+      - defect
+  - title: 🔧 Maintenance
+    labels:
+      - chore
+      - refactor
+      - maintenance
+  - title: 📖 Documentation Updates
+    labels:
+      - documentation
+      - docs
+  - title: 🌟 Improvements
+    labels:
+      - improvement
+      - optimization
+change-template: '- $TITLE by @$AUTHOR (#$NUMBER)'
+version-resolver:
+  major:
+    labels:
+      - major
+      - breaking-change
+  minor:
+    labels:
+      - minor
+      - feature
+  patch:
+    labels:
+      - patch
+      - fix
+      - bug
+      - chore
+      - maintenance
+  default: patch
