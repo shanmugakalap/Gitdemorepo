@@ -21,13 +21,13 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0   # Fetch entire history (necessary for tags)
-          fetch-tags: true # Ensure tags are fetched
+          fetch-tags: true  # Ensure tags are fetched
 
       - name: Get latest tag version
         id: get_version
         run: |
           # Get the latest tag (e.g., v1.0.0)
-          LATEST_TAG=$(git describe --tags --abbrev=0)
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
           echo "Latest tag: $LATEST_TAG"
 
           # Strip the 'v' from the tag (e.g., v1.0.0 -> 1.0.0)
@@ -40,6 +40,42 @@ jobs:
           echo "NEXT_MAJOR=$major" >> $GITHUB_ENV
           echo "NEXT_MINOR=$minor" >> $GITHUB_ENV
           echo "NEXT_PATCH=$patch" >> $GITHUB_ENV
+
+      - name: Determine version bump type
+        id: determine_bump
+        run: |
+          # Default to patch bump
+          BUMP_TYPE="patch"
+
+          # Check commit messages for keywords
+          if git log -1 --pretty=%B | grep -iqE "BREAKING CHANGE|feat"; then
+            BUMP_TYPE="minor"
+          fi
+
+          if git log -1 --pretty=%B | grep -iq "BREAKING CHANGE"; then
+            BUMP_TYPE="major"
+          fi
+
+          echo "BUMP_TYPE=$BUMP_TYPE" >> $GITHUB_ENV
+
+      - name: Increment version
+        run: |
+          # Calculate the next version based on the bump type
+          if [ "$BUMP_TYPE" = "major" ]; then
+            NEXT_MAJOR=$((NEXT_MAJOR + 1))
+            NEXT_MINOR=0
+            NEXT_PATCH=0
+          elif [ "$BUMP_TYPE" = "minor" ]; then
+            NEXT_MINOR=$((NEXT_MINOR + 1))
+            NEXT_PATCH=0
+          else
+            NEXT_PATCH=$((NEXT_PATCH + 1))
+          fi
+
+          echo "NEXT_MAJOR=$NEXT_MAJOR" >> $GITHUB_ENV
+          echo "NEXT_MINOR=$NEXT_MINOR" >> $GITHUB_ENV
+          echo "NEXT_PATCH=$NEXT_PATCH" >> $GITHUB_ENV
+          echo "New version: v$NEXT_MAJOR.$NEXT_MINOR.$NEXT_PATCH"
 
       - name: Run Release Drafter
         uses: release-drafter/release-drafter@v6.0.0
