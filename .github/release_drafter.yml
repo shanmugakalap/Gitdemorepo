@@ -1,5 +1,5 @@
-name-template: 'Release {{VERSION }}'
-tag-template: '{{VERSION }}'
+name-template: 'Release {{env.VERSION }}'
+tag-template: '{{env.VERSION }}'
 categories:
   - title: 🚀 Features
     labels:

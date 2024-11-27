@@ -87,10 +87,14 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "New version: $VERSION"
 
+      - name: Verify Version
+        run: |
+          echo "ENV Version: ${{ env.VERSION }}"
+
       - name: Run Release Drafter
         uses: release-drafter/release-drafter@v6.0.0
         with:
           config-name: release_drafter.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VERSION: ${{VERSION }}
+          VERSION: ${{env.VERSION }}
