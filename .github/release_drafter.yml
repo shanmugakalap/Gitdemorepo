@@ -1,3 +1,4 @@
+name: 'Release ${{env.VERSION }}'
 name-template: 'Release ${{env.VERSION }}'
 tag-template: 'v${{env.VERSION }}'
 categories:
