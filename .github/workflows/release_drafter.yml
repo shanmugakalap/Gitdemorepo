@@ -48,7 +48,7 @@ jobs:
           BUMP_TYPE="patch"
 
           # Check commit messages for keywords
-          if git log -1 --pretty=%B | grep -iqE "BREAKING CHANGE|feat"; then
+          if git log -1 --pretty=%B | grep -iqE "BREAKING CHANGE|feat|feature|enhancement|new-feature"; then
             BUMP_TYPE="minor"
           fi
 
