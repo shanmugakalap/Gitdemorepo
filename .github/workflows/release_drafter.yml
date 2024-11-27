@@ -48,14 +48,14 @@ jobs:
           BUMP_TYPE="patch"
 
           # Check commit messages for keywords
-          if git log -1 --pretty=%B | grep -iqE "BREAKING CHANGE|feat|feature|enhancement|new-feature"; then
-            BUMP_TYPE="minor"
-          fi
-
           if git log -1 --pretty=%B | grep -iq "BREAKING CHANGE"; then
             BUMP_TYPE="major"
           fi
 
+          # Check for feature or enhancement related keywords for a minor bump
+          if [[ "$BUMP_TYPE" != "major" ]] && git log -1 --pretty=%B | grep -iqE "feat|feature|enhancement|new-feature"; then
+            BUMP_TYPE="minor"
+          fi
           echo "BUMP_TYPE=$BUMP_TYPE" >> $GITHUB_ENV
 
       - name: Increment version
