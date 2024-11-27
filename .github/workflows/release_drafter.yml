@@ -93,4 +93,4 @@ jobs:
           config-name: release_drafter.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VERSION: ${{ env.VERSION }}
+          VERSION: ${{VERSION }}
