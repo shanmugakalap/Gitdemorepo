@@ -1,6 +1,5 @@
 name: 'Release ${{env.VERSION }}'
-name-template: 'Release ${{env.VERSION }}'
-tag-template: 'v${{env.VERSION }}'
+variables:  ${{env.VERSION }}
 categories:
   - title: 🚀 Features
     labels:
