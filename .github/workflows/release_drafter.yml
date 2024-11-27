@@ -81,12 +81,16 @@ jobs:
           echo "NEXT_PATCH=$NEXT_PATCH" >> $GITHUB_ENV
           echo "New version: v$NEXT_MAJOR.$NEXT_MINOR.$NEXT_PATCH"
 
+      - name: Set version variables
+        run: |
+          VERSION="v$NEXT_MAJOR.$NEXT_MINOR.$NEXT_PATCH"
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "New version: $VERSION"
+
       - name: Run Release Drafter
         uses: release-drafter/release-drafter@v6.0.0
         with:
           config-name: release_drafter.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NEXT_MAJOR: ${{ env.NEXT_MAJOR }}
-          NEXT_MINOR: ${{ env.NEXT_MINOR }}
-          NEXT_PATCH: ${{ env.NEXT_PATCH }}
+          VERSION: ${{ env.VERSION }}

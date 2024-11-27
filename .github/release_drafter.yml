@@ -1,5 +1,5 @@
-name-template: 'Release v${{ NEXT_MAJOR }}.${{ NEXT_MINOR }}.${{ NEXT_PATCH }}'
-tag-template: 'v${{ NEXT_MAJOR }}.${{ NEXT_MINOR }}.${{ NEXT_PATCH }}'
+name-template: 'Release {{ env.VERSION }}'
+tag-template: '{{ env.VERSION }}'
 categories:
   - title: 🚀 Features
     labels:
@@ -43,15 +43,15 @@ version-resolver:
       - chore
       - maintenance
   default: patch
-change-template: '- $TITLE by @$AUTHOR (#$NUMBER)'
-version-resolver:
-  major:
-    labels:
-      - major
-      - breaking-change
-  minor:
-    labels:
-      - minor
-      - feature
-      - feat
+template: |
+  ## 🚀 Release Notes
+
+
+  ## What's Changed
+  $CHANGES
+
+
+  ## Contributors
+  $CONTRIBUTORS
+
 
