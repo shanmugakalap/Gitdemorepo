@@ -98,5 +98,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSION: ${{env.VERSION }}
+
+      - name: Debug VERSION inside Release Drafter
         run: |
-          echo "Running Release Drafter with VERSION: ${{ env.VERSION }}"
+          echo "VERSION inside Release Drafter is: ${{ env.VERSION }}"
