@@ -52,7 +52,7 @@ jobs:
           BUMP_TYPE="patch"
 
           # Check commit messages for keywords
-          if git log -1 --pretty=%B | grep -iq "BREAKING CHANGE"; then
+          if git log -1 --pretty=%B | grep -iqE "major|breaking_changes"; then
             BUMP_TYPE="major"
           fi
 
