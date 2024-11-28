@@ -1,4 +1,4 @@
-name: Release ${{env.VERSION }}
+name: Release $VERSION
 categories:
   - title: 🚀 Features
     labels:
