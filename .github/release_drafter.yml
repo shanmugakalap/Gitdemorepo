@@ -1,4 +1,4 @@
-name: Release $VERSION
+name: v$VERSION
 categories:
   - title: 🚀 Features
     labels:
